@@ -7,6 +7,7 @@ import android.view.View;
 
 import fr.eni.lokacar.MenuPrincipal;
 import fr.eni.lokacar.R;
+import fr.eni.lokacar.ui.menu.MenuActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void connexion(View view) {
-        Intent it = new Intent(MainActivity.this, MenuPrincipal.class);
+        Intent it = new Intent(MainActivity.this, MenuActivity.class);
         startActivity(it);
     }
 }
