@@ -4,17 +4,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fr.eni.lokacar.ui.menu.freerent.rent.RentFragment"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:background="@android:color/white"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:background="@android:color/white">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/listView_Vehicule_Loue"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="RENT FRAGMENT" />
+        android:layout_height="match_parent"></ListView>
 
 
 </FrameLayout>

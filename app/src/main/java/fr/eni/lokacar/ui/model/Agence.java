@@ -12,14 +12,14 @@ public class Agence {
     private int Id;
     private String Nom;
 
-    private List<Vehicule> Vehicules = new ArrayList<>();
-    private Gerant Gerant;
+    private List<Vehicule> VehiculeEntity = new ArrayList<>();
+    private Gerant GerantEntity;
 
     public Agence(int id, String nom, List<Vehicule> vehicules, Gerant gerant) {
         Id = id;
         Nom = nom;
-        Vehicules = vehicules;
-        Gerant = gerant;
+        VehiculeEntity = vehicules;
+        GerantEntity = gerant;
     }
 
     public int getId() {
@@ -39,18 +39,18 @@ public class Agence {
     }
 
     public List<Vehicule> getVehicules() {
-        return Vehicules;
+        return VehiculeEntity;
     }
 
     public void setVehicules(List<Vehicule> vehicules) {
-        Vehicules = vehicules;
+        VehiculeEntity = vehicules;
     }
 
     public fr.eni.lokacar.ui.model.Gerant getGerant() {
-        return Gerant;
+        return GerantEntity;
     }
 
     public void setGerant(fr.eni.lokacar.ui.model.Gerant gerant) {
-        Gerant = gerant;
+        GerantEntity = gerant;
     }
 }

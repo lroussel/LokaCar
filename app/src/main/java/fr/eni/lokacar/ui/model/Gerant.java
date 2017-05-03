@@ -11,14 +11,14 @@ public class Gerant {
     private String Email;
     private String Password;
 
-    private Agence Agence;
+    private Agence AgenceEntity;
 
     public Gerant(int id, String nom, String email, String password, Agence agence) {
         Id = id;
         Nom = nom;
         Email = email;
         Password = password;
-        Agence = agence;
+        AgenceEntity = agence;
     }
 
     public int getId() {
@@ -54,10 +54,10 @@ public class Gerant {
     }
 
     public Agence getAgence() {
-        return Agence;
+        return AgenceEntity;
     }
 
     public void setAgence(Agence agence) {
-        Agence = agence;
+        AgenceEntity = agence;
     }
 }

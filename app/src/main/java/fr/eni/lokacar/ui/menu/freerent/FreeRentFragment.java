@@ -9,17 +9,39 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.lokacar.R;
+import fr.eni.lokacar.ui.Network;
 import fr.eni.lokacar.ui.menu.MenuActivity;
 import fr.eni.lokacar.ui.menu.freerent.free.FreeFragment;
 import fr.eni.lokacar.ui.menu.freerent.rent.RentFragment;
+import fr.eni.lokacar.ui.model.Vehicule;
+import fr.eni.lokacar.ui.utils.Constant;
+import fr.eni.lokacar.ui.utils.Preference;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,7 +64,6 @@ public class FreeRentFragment extends Fragment {
     private ViewPager mViewPager;
     private TabLayout tabLayout;
 
-
     public FreeRentFragment() {
         // Required empty public constructor
     }
@@ -55,7 +76,6 @@ public class FreeRentFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_freerent, container, false);
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
-
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) view.findViewById(R.id.container);

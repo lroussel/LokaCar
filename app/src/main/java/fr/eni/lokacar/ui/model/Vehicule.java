@@ -11,19 +11,25 @@ public class Vehicule {
     private String Modele;
     private String Immatriculation;
     private String ImageURL;
+    private String Prix;
 
     private Agence Agence;
-    private Location Location;
+    private Location LocationEntity;
+
+    public Vehicule(){
+
+    }
 
     public Vehicule(int id, String marque, String modele, String immatriculation,
-                    String imageURL, Agence agence, Location location) {
+                    String imageURL, Agence agence, Location location, String prix) {
         Id = id;
         Marque = marque;
         Modele = modele;
         Immatriculation = immatriculation;
         ImageURL = imageURL;
         Agence = agence;
-        Location = location;
+        LocationEntity = location;
+        Prix = prix;
     }
 
     public int getId() {
@@ -74,12 +80,19 @@ public class Vehicule {
         Agence = agence;
     }
 
-
-    public Location getLocation() {
-        return Location;
+    public Location getLocationEntity() {
+        return LocationEntity;
     }
 
-    public void setLocation(Location location) {
-        Location = location;
+    public void setLocationEntity(Location locationEntity) {
+        LocationEntity = locationEntity;
+    }
+
+    public String getPrix() {
+        return Prix;
+    }
+
+    public void setPrix(String prix) {
+        Prix = prix;
     }
 }
