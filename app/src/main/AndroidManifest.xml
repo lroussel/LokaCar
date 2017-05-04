@@ -13,11 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MenuPrincipal"
@@ -30,11 +25,20 @@
         <activity
             android:name=".ui.AddVehiculeActivity"
             android:parentActivityName=".ui.menu.MenuActivity" />
-        <activity android:name=".ui.menu.freerent.rent.InfoRentActivity" />
         <activity
             android:name=".ui.menu.freerent.free.InfoFreeActivity"
             android:label="@string/title_activity_info_free2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.menu.freerent.rent.InfoRentActivity"
+            android:label="@string/title_activity_info_rent2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.AssociateClientActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter></activity>
     </application>
 
 </manifest>

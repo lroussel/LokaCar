@@ -100,8 +100,6 @@ public class InfoFreeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO : Modification d'un véhicule
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
 

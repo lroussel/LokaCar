@@ -1,11 +1,13 @@
 package fr.eni.lokacar.ui.menu.freerent.rent;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,15 +21,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.lokacar.R;
 import fr.eni.lokacar.ui.Network;
 import fr.eni.lokacar.ui.menu.freerent.ListAdapter;
-import fr.eni.lokacar.ui.menu.freerent.free.FreeFragment;
 import fr.eni.lokacar.ui.model.Vehicule;
 import fr.eni.lokacar.ui.utils.Constant;
 import fr.eni.lokacar.ui.utils.Preference;
@@ -38,6 +37,7 @@ import fr.eni.lokacar.ui.utils.Preference;
 public class RentFragment extends Fragment {
 
     private ListView lvVehiculeLoue  ;
+    private List<Vehicule> vehicules;
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -85,7 +85,7 @@ public class RentFragment extends Fragment {
                             int length = response.length();
                             response = response.substring(1, length - 1);
 
-                            List<Vehicule> vehicules = new ArrayList<>();
+                            vehicules = new ArrayList<>();
 
                             try {
                                 vehicules = gson.fromJson(response, new TypeToken<List<Vehicule>>() {
@@ -99,6 +99,21 @@ public class RentFragment extends Fragment {
                                     R.layout.adapter_liste_vehicule,
                                     vehicules
                             ));
+
+                            lvVehiculeLoue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    Intent it = new Intent(getContext(), InfoRentActivity.class);
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable(Constant.INTENT_VEHICULE, vehicules.get(i));
+
+                                    it.putExtras(bundle);
+
+                                    startActivity(it);
+
+                                }
+                            });
                         }
                     }, new Response.ErrorListener() {
                 @Override
