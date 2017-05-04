@@ -11,4 +11,5 @@ public class Constant {
     public static final String PREF_AGENCE = "PREF_AGENCE";
     public static final String URL_GET_GERANT = "http://10.4.140.19/json/srv/gerant_%s";
     public static final String URL_GET_VEHICULES = "http://10.4.140.19/json/srv/vehicules_%s&%s";
+    public static final String INTENT_VEHICULE = "INTENT_VEHICULE";
 }

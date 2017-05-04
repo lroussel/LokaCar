@@ -1,13 +1,13 @@
 package fr.eni.lokacar.ui.menu.freerent.free;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,8 +19,6 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +36,7 @@ import fr.eni.lokacar.ui.utils.Preference;
     public class FreeFragment extends Fragment {
 
         private ListView lvVehiculeALouer  ;
+        private List<Vehicule> vehicules;
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -82,7 +81,7 @@ import fr.eni.lokacar.ui.utils.Preference;
                                 int length = response.length();
                                 response = response.substring(1, length - 1);
 
-                                List<Vehicule> vehicules = new ArrayList<>();
+                                vehicules = new ArrayList<>();
 
                                 try {
                                     vehicules = gson.fromJson(response, new TypeToken<List<Vehicule>>() {}.getType());
@@ -95,6 +94,20 @@ import fr.eni.lokacar.ui.utils.Preference;
                                         R.layout.adapter_liste_vehicule,
                                         vehicules
                                 ));
+
+                                lvVehiculeALouer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        Intent it = new Intent(getContext(), InfoFreeActivity.class);
+
+                                        Bundle bundle = new Bundle();
+                                        bundle.putSerializable(Constant.INTENT_VEHICULE, vehicules.get(i));
+                                        it.putExtras(bundle);
+
+                                        startActivity(it);
+
+                                    }
+                                });
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -107,4 +120,5 @@ import fr.eni.lokacar.ui.utils.Preference;
 
             return rootView;
         }
+
     }

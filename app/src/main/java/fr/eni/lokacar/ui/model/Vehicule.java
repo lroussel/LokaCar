@@ -1,10 +1,12 @@
 package fr.eni.lokacar.ui.model;
 
+import java.io.Serializable;
+
 /**
  * Created by lroussel2015 on 02/05/2017.
  */
 
-public class Vehicule {
+public class Vehicule implements Serializable {
 
     private int Id;
     private String Marque;
