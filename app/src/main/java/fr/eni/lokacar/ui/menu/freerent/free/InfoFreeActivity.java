@@ -136,7 +136,7 @@ public class InfoFreeActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(String response) {
                                         Toast.makeText(InfoFreeActivity.this, "Vehicule supprimé", Toast.LENGTH_SHORT).show();
-                                        
+
                                     }
                                 }, new Response.ErrorListener() {
                             @Override
