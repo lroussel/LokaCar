@@ -1,6 +1,7 @@
 package fr.eni.lokacar.ui.menu.freerent.free;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class InfoFreeActivity extends AppCompatActivity {
     private TextView tvMarque, tvModele, tvIMAT, tvPrix;
     private ImageView ivPhoto;
     private AppBarLayout ablPhoto;
+    private FloatingActionButton update, delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class InfoFreeActivity extends AppCompatActivity {
 
         ivPhoto = (ImageView) findViewById(R.id.img_voiture);
         ablPhoto = (AppBarLayout) findViewById(R.id.app_bar);
+
+        update = (FloatingActionButton) findViewById(R.id.update);
+        delete = (FloatingActionButton) findViewById(R.id.delete);
 
         if(getIntent().getExtras() != null){
 
@@ -69,19 +74,25 @@ public class InfoFreeActivity extends AppCompatActivity {
 
             getSupportActionBar().setTitle(vehicule.getMarque());
 
-            //tvMarque.setText(vehicule.getMarque());
             tvModele.setText(vehicule.getModele());
             tvIMAT.setText(vehicule.getImmatriculation());
             tvPrix.setText(vehicule.getPrix());
 
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // TODO : Modification d'un véhicule
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO : Suppression d'un vehicule
             }
         });
     }
