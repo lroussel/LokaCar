@@ -105,4 +105,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_info_rent2">InfoRentActivity2</string>
+    <string name="title_activity_menu2">MenuActivity2</string>
 </resources>

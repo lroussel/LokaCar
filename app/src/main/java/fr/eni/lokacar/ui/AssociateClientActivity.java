@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 import fr.eni.lokacar.R;
-import fr.eni.lokacar.ui.menu.MenuActivity;
+import fr.eni.lokacar.ui.menu.freerent.FreeRentFragment;
 import fr.eni.lokacar.ui.model.Vehicule;
 import fr.eni.lokacar.ui.utils.Constant;
 
@@ -80,7 +80,6 @@ public class AssociateClientActivity extends AppCompatActivity {
         }, yy, mm, dd);
 
         datePicker.show();
-
     }
 
     @Override
@@ -115,7 +114,7 @@ public class AssociateClientActivity extends AppCompatActivity {
                 public void onResponse(String response) {
                     if(response.equals("200")){
                         Toast.makeText(AssociateClientActivity.this, "Enregistrement effectué", Toast.LENGTH_SHORT).show();
-                        Intent it = new Intent(AssociateClientActivity.this, MenuActivity.class);
+                        Intent it = new Intent(AssociateClientActivity.this, FreeRentFragment.class);
                         startActivity(it);
                         finish();
                     }else{

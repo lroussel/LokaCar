@@ -31,7 +31,7 @@ import java.util.Map;
 
 import fr.eni.lokacar.R;
 import fr.eni.lokacar.ui.main.MainActivity;
-import fr.eni.lokacar.ui.menu.MenuActivity;
+import fr.eni.lokacar.ui.menu.freerent.MenuActivity;
 import fr.eni.lokacar.ui.model.Gerant;
 import fr.eni.lokacar.ui.utils.Constant;
 import fr.eni.lokacar.ui.utils.FastDialog;

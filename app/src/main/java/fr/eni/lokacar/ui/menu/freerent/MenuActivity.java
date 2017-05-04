@@ -1,51 +1,36 @@
 package fr.eni.lokacar.ui.menu.freerent;
 
-
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.lokacar.R;
-import fr.eni.lokacar.ui.Network;
+import fr.eni.lokacar.ui.AddVehiculeActivity;
+import fr.eni.lokacar.ui.main.MainActivity;
 import fr.eni.lokacar.ui.menu.freerent.free.FreeFragment;
 import fr.eni.lokacar.ui.menu.freerent.rent.RentFragment;
-import fr.eni.lokacar.ui.model.Vehicule;
-import fr.eni.lokacar.ui.utils.Constant;
 import fr.eni.lokacar.ui.utils.Preference;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class FreeRentFragment extends Fragment {
+public class MenuActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -61,50 +46,76 @@ public class FreeRentFragment extends Fragment {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private TabLayout tabLayout;
-
-    public FreeRentFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_freerent, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu2);
 
-        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) view.findViewById(R.id.container);
-
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("LokaCar");
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
         //mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
 
         setViewPager(mViewPager);
 
-        tabLayout.setupWithViewPager(mViewPager);
 
-        super.onActivityCreated(savedInstanceState);
     }
 
     private void setViewPager (ViewPager viewPager){
-        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getFragmentManager());
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FreeFragment(), "À LOUER");
         adapter.addFragment(new RentFragment(), "LOUÉ");
         viewPager.setAdapter(adapter);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_menu_activity2, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_logout) {
+            Preference.setAgence(MenuActivity.this, "");
+            Preference.setEmail(MenuActivity.this, "");
+            Preference.setNom(MenuActivity.this, "");
+            Preference.setPassword(MenuActivity.this, "");
+
+            Intent it = new Intent(MenuActivity.this, MainActivity.class);
+            startActivity(it);
+
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void viewAddCar(View view) {
+        Intent it = new Intent(MenuActivity.this, AddVehiculeActivity.class);
+
+        startActivity(it);
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -141,4 +152,5 @@ public class FreeRentFragment extends Fragment {
             return mFragmentTitleList.get(position);
         }
     }
+
 }
