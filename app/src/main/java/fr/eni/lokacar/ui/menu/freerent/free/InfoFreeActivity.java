@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -19,25 +20,38 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.lokacar.R;
+import fr.eni.lokacar.ui.AddVehiculeActivity;
 import fr.eni.lokacar.ui.AssociateClientActivity;
 import fr.eni.lokacar.ui.Network;
+import fr.eni.lokacar.ui.menu.MenuActivity;
 import fr.eni.lokacar.ui.menu.freerent.ListAdapter;
 import fr.eni.lokacar.ui.model.Vehicule;
 import fr.eni.lokacar.ui.utils.Constant;
+import fr.eni.lokacar.ui.utils.Preference;
 
 public class InfoFreeActivity extends AppCompatActivity {
 
@@ -107,9 +121,33 @@ public class InfoFreeActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = String.format(Constant.URL_DELETE_CAR, String.valueOf(vehicule.getId()));
+
                 if(Network.isNetworkAvailable(InfoFreeActivity.this)) {
-                    
+
+
+                    try {
+                        String URL = String.format(Constant.URL_DELETE_CAR, String.valueOf(vehicule.getId()));
+
+
+                        RequestQueue queue = Volley.newRequestQueue(InfoFreeActivity.this);
+
+                        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        Toast.makeText(InfoFreeActivity.this, "Vehicule supprimé", Toast.LENGTH_SHORT).show();
+                                        
+                                    }
+                                }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(InfoFreeActivity.this, "Erreur lors de la suppression du vehicule", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        queue.add(stringRequest);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
