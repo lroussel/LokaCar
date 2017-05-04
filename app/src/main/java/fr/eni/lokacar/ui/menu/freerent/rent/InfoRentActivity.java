@@ -34,7 +34,7 @@ public class InfoRentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_rent2);
+        setContentView(R.layout.activity_info_rent);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -45,7 +45,6 @@ public class InfoRentActivity extends AppCompatActivity {
         tvIMAT = (TextView) findViewById(R.id.textView_IMAT);
         tvPrix = (TextView) findViewById(R.id.textView_prix);
 
-        ivPhoto = (ImageView) findViewById(R.id.img_voiture);
         ablPhoto = (AppBarLayout) findViewById(R.id.app_bar);
 
         update = (FloatingActionButton) findViewById(R.id.update);

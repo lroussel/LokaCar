@@ -31,6 +31,10 @@
             android:name=".ui.AddVehiculeActivity"
             android:parentActivityName=".ui.menu.MenuActivity" />
         <activity
+            android:name=".ui.menu.freerent.MenuActivity"
+            android:label="@string/title_activity_menu2"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".ui.menu.freerent.free.InfoFreeActivity"
             android:label="@string/title_activity_info_free2"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -38,7 +42,7 @@
             android:name=".ui.menu.freerent.rent.InfoRentActivity"
             android:label="@string/title_activity_info_rent2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.AssociateClientActivity"></activity>
+        <activity android:name=".ui.AssociateClientActivity" />
     </application>
 
 </manifest>
