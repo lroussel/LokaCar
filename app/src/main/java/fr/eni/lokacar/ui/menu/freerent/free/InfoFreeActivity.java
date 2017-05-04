@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.lokacar.R;
+import fr.eni.lokacar.ui.AssociateClientActivity;
 import fr.eni.lokacar.ui.Network;
 import fr.eni.lokacar.ui.menu.freerent.ListAdapter;
 import fr.eni.lokacar.ui.model.Vehicule;
@@ -129,5 +130,16 @@ public class InfoFreeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void associateClient(View view) {
+        Intent it = new Intent(InfoFreeActivity.this, AssociateClientActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constant.INTENT_VEHICULE_ASSOC, vehicule);
+
+        it.putExtras(bundle);
+
+        startActivity(it);
     }
 }
