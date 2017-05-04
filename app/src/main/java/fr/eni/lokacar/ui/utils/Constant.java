@@ -13,4 +13,5 @@ public class Constant {
     public static final String URL_GET_VEHICULES = "http://10.4.140.19/json/srv/vehicules_%s&%s";
     public static final String INTENT_VEHICULE = "INTENT_VEHICULE";
     public static final String URL_ADD_CAR = "http://10.4.140.19/json/srv/addVehicule";
+    public static final String URL_DELETE_CAR ="http://10.4.140.19/json/srv/deletevehicule_%s" ;
 }

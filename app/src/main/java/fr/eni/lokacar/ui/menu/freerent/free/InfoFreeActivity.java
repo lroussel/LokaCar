@@ -1,5 +1,6 @@
 package fr.eni.lokacar.ui.menu.freerent.free;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,13 +14,27 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.eni.lokacar.R;
+import fr.eni.lokacar.ui.Network;
+import fr.eni.lokacar.ui.menu.freerent.ListAdapter;
 import fr.eni.lokacar.ui.model.Vehicule;
 import fr.eni.lokacar.ui.utils.Constant;
 
@@ -29,6 +44,7 @@ public class InfoFreeActivity extends AppCompatActivity {
     private ImageView ivPhoto;
     private AppBarLayout ablPhoto;
     private FloatingActionButton update, delete;
+    private Vehicule vehicule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +69,7 @@ public class InfoFreeActivity extends AppCompatActivity {
 
         if(getIntent().getExtras() != null){
 
-            Vehicule vehicule = (Vehicule) getIntent().getExtras().get(Constant.INTENT_VEHICULE);
+            vehicule = (Vehicule) getIntent().getExtras().get(Constant.INTENT_VEHICULE);
 
             Picasso.with(InfoFreeActivity.this).load(vehicule.getImageURL()).into(new Target() {
                 @Override
@@ -92,8 +108,14 @@ public class InfoFreeActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : Suppression d'un vehicule
+                String url = String.format(Constant.URL_DELETE_CAR, String.valueOf(vehicule.getId()));
+                if(Network.isNetworkAvailable(InfoFreeActivity.this)) {
+                    
+                }
             }
+
+
+
         });
     }
 
