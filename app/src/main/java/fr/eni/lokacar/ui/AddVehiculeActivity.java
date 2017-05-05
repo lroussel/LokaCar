@@ -33,6 +33,7 @@ import fr.eni.lokacar.R;
 import fr.eni.lokacar.ui.main.MainActivity;
 import fr.eni.lokacar.ui.menu.freerent.MenuActivity;
 import fr.eni.lokacar.ui.model.Gerant;
+import fr.eni.lokacar.ui.model.Vehicule;
 import fr.eni.lokacar.ui.utils.Constant;
 import fr.eni.lokacar.ui.utils.FastDialog;
 import fr.eni.lokacar.ui.utils.Preference;
@@ -45,7 +46,7 @@ public class AddVehiculeActivity extends AppCompatActivity {
     private EditText editTextIMAT;
     private EditText editTextURLPhoto;
     private EditText editTextPrix;
-
+    private boolean update;
 
 
 
@@ -60,9 +61,23 @@ public class AddVehiculeActivity extends AppCompatActivity {
         editTextIMAT = (EditText) findViewById(R.id.editText_IMAT);
         editTextURLPhoto = (EditText) findViewById(R.id.editText_URL_photo);
         editTextPrix = (EditText) findViewById(R.id.editText_Prix);
+        update = getIntent().getBooleanExtra("update", false);
+        Vehicule car = (Vehicule) getIntent().getExtras().get("car");
+        if (update){
+            editTextMarque.setText(car.getMarque());
+            editTextModele.setText(car.getModele());
+            editTextIMAT.setText(car.getImmatriculation());
+            editTextURLPhoto.setText(car.getImageURL());
+            editTextPrix.setText(car.getPrix());
+
+        }
+
+
     }
 
     public void saveCar(View view) {
+        String URL;
+
         if(editTextMarque.getText().toString().equals("") || editTextModele.getText().toString().equals("")
                  || editTextIMAT.getText().toString().equals("") || editTextURLPhoto.getText().toString().equals("")){
             FastDialog.showDialog(AddVehiculeActivity.this, FastDialog.SIMPLE_DIALOG, "Vous devez inscrire l'email et le mot de passe pour continuer");
@@ -70,7 +85,11 @@ public class AddVehiculeActivity extends AppCompatActivity {
 
             try {
                 RequestQueue requestQueue = Volley.newRequestQueue(this);
-                String URL = Constant.URL_ADD_CAR;
+                if (update){
+                    URL = Constant.URL_UPADTE_CAR;
+                }else {
+                    URL = Constant.URL_ADD_CAR;
+                }
                 JSONObject jsonBody = new JSONObject();
                 jsonBody.put("agence", Preference.getAgence(AddVehiculeActivity.this));
                 jsonBody.put("marque", editTextMarque.getText().toString());

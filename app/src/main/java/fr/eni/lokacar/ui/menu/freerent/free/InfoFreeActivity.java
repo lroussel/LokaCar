@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import fr.eni.lokacar.R;
+import fr.eni.lokacar.ui.AddVehiculeActivity;
 import fr.eni.lokacar.ui.AssociateClientActivity;
 import fr.eni.lokacar.ui.Network;
 import fr.eni.lokacar.ui.menu.freerent.MenuActivity;
@@ -93,7 +94,11 @@ public class InfoFreeActivity extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO : Modification d'un véhicule
+                Intent i = new Intent(InfoFreeActivity.this, AddVehiculeActivity.class)
+                        .putExtra("update", true)
+                        .putExtra("car", vehicule);
+                startActivity(i);
+                finish();
             }
         });
 

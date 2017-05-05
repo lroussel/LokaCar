@@ -23,4 +23,5 @@ public class Constant {
     public static final String URL_ADD_CAR = "http://10.4.140.19/json/srv/addVehicule";
     public static final String URL_ADD_LOC = "http://10.4.140.19/json/srv/addLocation";
     public static final String URL_DELETE_CAR ="http://10.4.140.19/json/srv/deletevehicule_%s" ;
+    public static String URL_UPADTE_CAR = "http://10.4.140.19/json/srv/updatevehicule";
 }
