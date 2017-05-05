@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -27,7 +28,8 @@ import fr.eni.lokacar.ui.utils.Constant;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText etEmail, etPassword;
+    private EditText etEmail, etPassword;
+    private CheckBox cbRappel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
 
         etEmail = (EditText) findViewById(R.id.editText_mail);
         etPassword = (EditText) findViewById(R.id.editText_password);
+        cbRappel = (CheckBox) findViewById(R.id.checkBox_rappel);
+
+        if(Preference.getRappel(MainActivity.this).equals("true")){
+            etEmail.setText(Preference.getEmail(MainActivity.this));
+            etPassword.setText(Preference.getPassword(MainActivity.this));
+            cbRappel.setChecked(true);
+        }
     }
 
     public void connexion(View view) {
@@ -76,7 +85,13 @@ public class MainActivity extends AppCompatActivity {
                                 if (etPassword.getText().toString().equals(gerant.getPassword())) {
                                     Preference.setNom(MainActivity.this, gerant.getNom());
                                     Preference.setEmail(MainActivity.this, gerant.getEmail());
+                                    Preference.setPassword(MainActivity.this, gerant.getPassword());
                                     Preference.setAgence(MainActivity.this, gerant.getAgence().getNom());
+                                    if(cbRappel.isChecked()){
+                                        Preference.setRappel(MainActivity.this, "true");
+                                    }else{
+                                        Preference.setRappel(MainActivity.this, "false");
+                                    }
 
                                     Intent it = new Intent(MainActivity.this, MenuActivity.class);
                                     startActivity(it);

@@ -3,6 +3,7 @@ package fr.eni.lokacar.ui;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -114,6 +115,19 @@ public class AssociateClientActivity extends AppCompatActivity {
                 public void onResponse(String response) {
                     if(response.equals("200")){
                         Toast.makeText(AssociateClientActivity.this, "Enregistrement effectué", Toast.LENGTH_SHORT).show();
+
+                        String sms_body = String.format(Constant.SMS_CLIENT,
+                                etNom.getText().toString(),
+                                vehicule.getMarque() + " - " + vehicule.getModele(),
+                                vehicule.getImmatriculation(),
+                                etDateDebut.getText().toString(),
+                                etDateFin.getText().toString());
+
+                        // TODO : Envoyer Message client
+                        Intent sms = new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", etTelephone.getText().toString(), null));
+                        sms.putExtra("sms_body", sms_body);
+                        startActivity(sms);
+
                         Intent it = new Intent(AssociateClientActivity.this, FreeRentFragment.class);
                         startActivity(it);
                         finish();

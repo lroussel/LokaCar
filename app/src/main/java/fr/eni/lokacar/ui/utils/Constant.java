@@ -14,6 +14,7 @@ public class Constant {
     public static final String PREF_AGENCE = "PREF_AGENCE";
     public static final String INTENT_VEHICULE = "INTENT_VEHICULE";
     public static final String INTENT_VEHICULE_ASSOC = "INTENT_VEHICULE_ASSOC";
+    public static final String PREF_RAPPEL = "PREF_RAPPEL";
 
     /**
      * Requêtes URL pour WebService
@@ -24,4 +25,6 @@ public class Constant {
     public static final String URL_ADD_LOC = "http://10.4.140.19/json/srv/addLocation";
     public static final String URL_DELETE_CAR ="http://10.4.140.19/json/srv/deletevehicule_%s" ;
     public static String URL_UPADTE_CAR = "http://10.4.140.19/json/srv/updatevehicule";
+    public static final String URL_DISSOCIATE = "http://10.4.140.19/json/srv/deletelocation_%s";
+    public static final String SMS_CLIENT = "M. %s, Vous venez de louer la voiture %s (Immatriculation : %s) du %s au %s. Bonne route !";
 }

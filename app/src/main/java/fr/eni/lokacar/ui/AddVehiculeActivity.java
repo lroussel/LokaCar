@@ -1,6 +1,7 @@
 package fr.eni.lokacar.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -104,6 +105,7 @@ public class AddVehiculeActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         if (response.equals("200")){
                             Toast.makeText(AddVehiculeActivity.this, "Enregisrement effectué", Toast.LENGTH_SHORT).show();
+
                             Intent i = new Intent(AddVehiculeActivity.this, MenuActivity.class);
                             startActivity(i);
                             finish();

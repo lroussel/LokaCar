@@ -47,4 +47,12 @@ public class Preference {
     public static void setAgence(Context context, String agence){
         get(context).edit().putString(Constant.PREF_AGENCE, agence).commit();
     }
+
+    public static String getRappel(Context context){
+        return get(context).getString(Constant.PREF_RAPPEL, "");
+    }
+
+    public static void setRappel(Context context, String agence){
+        get(context).edit().putString(Constant.PREF_RAPPEL, agence).commit();
+    }
 }
