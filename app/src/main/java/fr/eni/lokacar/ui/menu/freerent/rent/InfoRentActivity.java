@@ -1,5 +1,6 @@
 package fr.eni.lokacar.ui.menu.freerent.rent;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -13,18 +14,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import fr.eni.lokacar.R;
+import fr.eni.lokacar.ui.Network;
+import fr.eni.lokacar.ui.menu.freerent.free.InfoFreeActivity;
 import fr.eni.lokacar.ui.model.Vehicule;
 import fr.eni.lokacar.ui.utils.Constant;
 
 public class InfoRentActivity extends AppCompatActivity {
 
     private TextView tvMarque, tvModele, tvIMAT, tvPrix;
-    private ImageView ivPhoto;
     private AppBarLayout ablPhoto;
 
     private FloatingActionButton update, delete;
@@ -105,5 +115,41 @@ public class InfoRentActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void dissociateClient(View view) {
+        // TODO : Dissociation d'un client
+        if(Network.isNetworkAvailable(InfoRentActivity.this)){
+            RequestQueue queue = Volley.newRequestQueue(InfoRentActivity.this);
+            String url = String.format(Constant.URL_DISSOCIATE, vehicule.getImmatriculation());
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if(response.equals("200")){
+                                Toast.makeText(InfoRentActivity.this, "Véhicule dissocié de la location", Toast.LENGTH_SHORT).show();
+
+                                Intent it = new Intent(InfoRentActivity.this, InfoFreeActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable(Constant.INTENT_VEHICULE, vehicule);
+
+                                it.putExtras(bundle);
+
+                                startActivity(it);
+                                finish();
+                            }else{
+                                Toast.makeText(InfoRentActivity.this, "Une erreur inconnue s'est produite", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(InfoRentActivity.this, "Une erreur avec la reponse s'est produite", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            queue.add(stringRequest);
+        }
     }
 }

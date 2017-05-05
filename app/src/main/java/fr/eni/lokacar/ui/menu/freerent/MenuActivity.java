@@ -96,10 +96,10 @@ public class MenuActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            Preference.setAgence(MenuActivity.this, "");
-            Preference.setEmail(MenuActivity.this, "");
-            Preference.setNom(MenuActivity.this, "");
-            Preference.setPassword(MenuActivity.this, "");
+            //Preference.setAgence(MenuActivity.this, "");
+            //Preference.setEmail(MenuActivity.this, "");
+            //Preference.setNom(MenuActivity.this, "");
+            //Preference.setPassword(MenuActivity.this, "");
 
             Intent it = new Intent(MenuActivity.this, MainActivity.class);
             startActivity(it);
