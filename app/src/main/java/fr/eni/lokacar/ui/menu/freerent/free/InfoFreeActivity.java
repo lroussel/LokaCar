@@ -118,6 +118,7 @@ public class InfoFreeActivity extends AppCompatActivity {
                                         Intent i = new Intent(InfoFreeActivity.this, MenuActivity.class);
                                         startActivity(i);
                                         finish();
+
                                         }
                                 }, new Response.ErrorListener() {
                             @Override
